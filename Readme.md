@@ -77,11 +77,11 @@ Let's consider the following dataset:
 
 | x1 | x2 | Label |
 | --- | --- | --- |
-| 1 | 1 | 1 |
+| 1 | 1 | 0 |
 | 1 | 2 | 1 |
-| 2 | 1 | 1 |
-| 2 | 2 | 1 |
-| 3 | 1 | 1 |
+| 2 | 1 | 0 |
+| 2 | 2 | 0 |
+| 3 | 1 | 0 |
 | 3 | 2 | 1 |
 | 4 | 1 | 1 |
 | 4 | 2 | 1 |
@@ -120,7 +120,34 @@ $$
 d(x, x_8) = \sqrt{(6-4)^2 + (3-2)^2} = \sqrt{25} = 5
 $$
 
-The $K$ training samples that are nearest to $x$ are $x_5$, $x_6$, $x_7$ and $x_8$. The label of $x$ is predicted by majority vote, which is 1. Therefore, the predicted label of $x$ is 1.
+resulting in the following table:
+
+| x1 | x2 | Label | Distance |
+| --- | --- | --- | --- |
+| 1 | 1 | 0 | 5 |
+| 1 | 2 | 1 | 5.1 |
+| 2 | 1 | 0 | 5 |
+| 2 | 2 | 0 | 5.1 |
+| 3 | 1 | 0 | 3.16 |
+| 3 | 2 | 1 | 3.61 |
+| 4 | 1 | 1 | 5.1 |
+| 4 | 2 | 1 | 5 |
+
+Sorting the table by the distance column, we get:
+
+| x1 | x2 | Label | Distance |
+| --- | --- | --- | --- |
+| 3 | 1 | 0 | 3.16 |
+| 3 | 2 | 1 | 3.61 |
+| 1 | 1 | 0 | 5 |
+| 2 | 1 | 0 | 5 |
+| 1 | 2 | 1 | 5.1 |
+| 2 | 2 | 0 | 5.1 |
+| 4 | 1 | 1 | 5.1 |
+| 4 | 2 | 1 | 5 |
+
+
+The $K$ nearest neighbors of $x$ are $x_5$ and $x_6$. The label of $x$ is predicted by majority vote, which is 0. Therefore, the predicted label of $x$ is 0.
 
 
 where $d(\cdot, \cdot)$ is the distance function, $r$ is the radius of the neighborhood and $I(\cdot)$ is the indicator function.
